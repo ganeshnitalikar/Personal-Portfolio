@@ -1,102 +1,143 @@
-import { motion, useInView } from 'framer-motion'
-import { useRef, useState } from 'react'
-import { Code2, Server, Database, Zap } from 'lucide-react'
+import { motion, useInView } from "framer-motion";
+import { useRef, useState } from "react";
+import { Code2, Server, Database, Zap, Brain } from "lucide-react";
 import {
-  SiReact, SiFlutter, SiTypescript, SiTailwindcss, SiNextdotjs,
-  SiNodedotjs, SiExpress, SiSpringboot, SiDotnet,
-  SiMongodb, SiPostgresql, SiMysql, SiDocker, SiRedis
-} from 'react-icons/si'
+  SiReact,
+  SiTypescript,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiSpringboot,
+  SiDotnet,
+  SiMongodb,
+  SiPostgresql,
+  SiMysql,
+  SiDocker,
+  SiPython,
+  SiPytorch,
+} from "react-icons/si";
 
 const skillCategories = [
   {
-    title: 'Frontend Development',
+    title: "Frontend & Full-Stack",
     icon: Code2,
-    color: '#00f5ff',
-    dimColor: 'rgba(0,245,255,0.08)',
-    borderColor: 'rgba(0,245,255,0.15)',
+    color: "#00f5ff",
+    dimColor: "rgba(0,245,255,0.08)",
+    borderColor: "rgba(0,245,255,0.15)",
     skills: [
-      { name: 'React', Icon: SiReact },
-      { name: 'Flutter', Icon: SiFlutter },
-      { name: 'TypeScript', Icon: SiTypescript },
-      { name: 'Tailwind CSS', Icon: SiTailwindcss },
-      { name: 'Next.js', Icon: SiNextdotjs },
+      { name: "React.js", Icon: SiReact },
+      { name: "Next.js", Icon: SiNextdotjs },
+      { name: "TypeScript", Icon: SiTypescript },
+      { name: "JavaScript", Icon: SiTypescript },
     ],
   },
   {
-    title: 'Backend Engineering',
+    title: "Backend Engineering",
     icon: Server,
-    color: '#7b2fff',
-    dimColor: 'rgba(123,47,255,0.08)',
-    borderColor: 'rgba(123,47,255,0.15)',
+    color: "#7b2fff",
+    dimColor: "rgba(123,47,255,0.08)",
+    borderColor: "rgba(123,47,255,0.15)",
     skills: [
-      { name: 'Node.js', Icon: SiNodedotjs },
-      { name: 'Express.js', Icon: SiExpress },
-      { name: 'Spring Boot', Icon: SiSpringboot },
-      { name: 'ASP.NET Core', Icon: SiDotnet },
-      { name: 'REST APIs', Icon: Server },
+      { name: "Java", Icon: SiSpringboot },
+      { name: "Spring Boot", Icon: SiSpringboot },
+      { name: "Node.js", Icon: SiNodedotjs },
+      { name: "ASP.NET Core", Icon: SiDotnet },
+      { name: "REST APIs", Icon: Server },
     ],
   },
   {
-    title: 'Database & DevOps',
+    title: "Database & DevOps",
     icon: Database,
-    color: '#ff2df7',
-    dimColor: 'rgba(255,45,247,0.08)',
-    borderColor: 'rgba(255,45,247,0.15)',
+    color: "#ff2df7",
+    dimColor: "rgba(255,45,247,0.08)",
+    borderColor: "rgba(255,45,247,0.15)",
     skills: [
-      { name: 'MongoDB', Icon: SiMongodb },
-      { name: 'PostgreSQL', Icon: SiPostgresql },
-      { name: 'MySQL', Icon: SiMysql },
-      { name: 'Docker', Icon: SiDocker },
-      { name: 'Redis', Icon: SiRedis },
+      { name: "PostgreSQL", Icon: SiPostgresql },
+      { name: "MySQL", Icon: SiMysql },
+      { name: "MongoDB", Icon: SiMongodb },
+      { name: "Docker", Icon: SiDocker },
     ],
   },
-]
+  {
+    title: "AI / ML Engineering",
+    icon: Brain,
+    color: "#00f5ff",
+    dimColor: "rgba(0,245,255,0.08)",
+    borderColor: "rgba(0,245,255,0.15)",
+    skills: [
+      { name: "Python", Icon: SiPython },
+      { name: "PyTorch", Icon: SiPytorch },
+      { name: "LLM Integration", Icon: Brain },
+      { name: "RAG Architecture", Icon: Brain },
+      { name: "Prompt Engineering", Icon: Brain },
+    ],
+  },
+];
 
 const extraSkills = [
-  'Git & GitHub', 'CI/CD Pipelines', 'Microservices',
-  'WebSockets', 'JWT Authentication', 'Agile/Scrum', 'Figma', 'Linux'
-]
+  "Microservices",
+  "Spring Cloud",
+  "Eureka",
+  "API Gateway",
+  "JWT Authentication",
+  "Spring Security",
+  "JPA / Hibernate",
+  "Jenkins",
+  "Maven",
+  "GitHub Actions",
+  "Kubernetes",
+  "ReAct Agents",
+  "ONNX",
+  "CI/CD Pipelines",
+  "DSA",
+  "System Design",
+];
 
 function TechPill({ name, Icon, color, delay }) {
-  const [isHovered, setIsHovered] = useState(false)
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <motion.div
       className="flex items-center gap-2.5 px-3.5 py-2 rounded-lg bg-white/[0.03] border border-white/[0.05] cursor-default transition-all duration-300"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{
-        borderColor: isHovered ? color : 'rgba(255,255,255,0.05)',
-        backgroundColor: isHovered ? `${color}15` : 'rgba(255,255,255,0.03)',
-        boxShadow: isHovered ? `0 4px 20px ${color}20` : 'none',
+        borderColor: isHovered ? color : "rgba(255,255,255,0.05)",
+        backgroundColor: isHovered ? `${color}15` : "rgba(255,255,255,0.03)",
+        boxShadow: isHovered ? `0 4px 20px ${color}20` : "none",
       }}
       initial={{ opacity: 0, y: 15 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-20px' }}
+      viewport={{ once: true, margin: "-20px" }}
       transition={{ duration: 0.4, delay }}
       whileHover={{ y: -3 }}
     >
-      <Icon 
-        size={16} 
-        style={{ color: isHovered ? color : 'rgba(255,255,255,0.5)', transition: 'color 0.3s' }} 
+      <Icon
+        size={16}
+        style={{
+          color: isHovered ? color : "rgba(255,255,255,0.5)",
+          transition: "color 0.3s",
+        }}
       />
-      <span 
+      <span
         className="text-[13px] font-mono transition-colors duration-300 whitespace-nowrap"
-        style={{ color: isHovered ? '#fff' : 'rgba(255,255,255,0.65)' }}
+        style={{ color: isHovered ? "#fff" : "rgba(255,255,255,0.65)" }}
       >
         {name}
       </span>
     </motion.div>
-  )
+  );
 }
 
 export default function Skills() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="skills" className="relative py-24 md:py-32 px-6 w-full" aria-label="Skills section">
+    <section
+      id="skills"
+      className="relative py-24 md:py-32 px-6 w-full"
+      aria-label="Skills section"
+    >
       <div className="max-w-6xl mx-auto" ref={ref}>
-        {/* Header */}
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 28 }}
@@ -110,14 +151,14 @@ export default function Skills() {
             Tech Stack & Tools
           </h2>
           <p className="mt-8 text-white/38 max-w-xl mx-auto text-sm md:text-base font-heading">
-            A comprehensive toolkit for building modern, scalable, full-stack applications from scratch to production.
+            A comprehensive toolkit for building modern full-stack and
+            AI-powered applications from scratch to production.
           </p>
         </motion.div>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mb-10">
           {skillCategories.map((cat, catIndex) => {
-            const IconComp = cat.icon
+            const IconComp = cat.icon;
             return (
               <motion.div
                 key={cat.title}
@@ -128,22 +169,21 @@ export default function Skills() {
                 transition={{ duration: 0.4, delay: catIndex * 0.08 }}
                 whileHover={{ y: -6, transition: { duration: 0.3 } }}
               >
-                {/* Card header */}
                 <div className="flex items-center gap-3.5 mb-2">
                   <div
                     className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{ background: cat.dimColor, border: `1px solid ${cat.borderColor}` }}
+                    style={{
+                      background: cat.dimColor,
+                      border: `1px solid ${cat.borderColor}`,
+                    }}
                   >
                     <IconComp size={20} style={{ color: cat.color }} />
                   </div>
-                  <div>
-                    <h3 className="text-[15px] font-semibold font-heading text-white/85 tracking-wide">
-                      {cat.title}
-                    </h3>
-                  </div>
+                  <h3 className="text-[15px] font-semibold font-heading text-white/85 tracking-wide">
+                    {cat.title}
+                  </h3>
                 </div>
 
-                {/* Tech Pills Grid */}
                 <div className="flex flex-wrap gap-3">
                   {cat.skills.map((skill, i) => (
                     <TechPill
@@ -156,11 +196,10 @@ export default function Skills() {
                   ))}
                 </div>
               </motion.div>
-            )
+            );
           })}
         </div>
 
-        {/* Extra skills row */}
         <motion.div
           className="glass p-6 md:p-8"
           initial={{ opacity: 0, y: 24 }}
@@ -169,7 +208,9 @@ export default function Skills() {
         >
           <div className="flex items-center gap-2 mb-5">
             <Zap size={16} className="text-neon-cyan/70" />
-            <span className="text-xs font-mono text-white/40 tracking-widest uppercase">Other Technologies & Practices</span>
+            <span className="text-xs font-mono text-white/40 tracking-widest uppercase">
+              Other Technologies & Practices
+            </span>
           </div>
           <div className="flex flex-wrap gap-2.5">
             {extraSkills.map((skill, i) => (
@@ -188,5 +229,5 @@ export default function Skills() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
